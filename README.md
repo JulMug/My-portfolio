@@ -1,6 +1,6 @@
 # Julien Busiho — Personal Portfolio
 
-A personal portfolio showcasing my journey, skills, projects, and professional interests in **Frontend Development, Data Analytics, and Digital Innovation**.
+A personal portfolio showcasing my journey, skills, projects, and professional interests in **Software Engineer, Data Analytics, and Digital Innovation**.
 
 ## About
 
