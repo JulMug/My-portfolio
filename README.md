@@ -57,7 +57,7 @@ Figma design: [Julien Busiho — Portfolio](https://www.figma.com/design/uslevNs
 To run the project locally:
 
 ```bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/JulMug/My-portfolio.git
 cd portfolio
 npm install
 npm run dev
@@ -72,9 +72,9 @@ The initial React environment and Tailwind CSS / DaisyUI configuration are set u
 ## Contact
 
 - **Location:** Goma, Democratic Republic of the Congo
-- **GitHub:** [Add your GitHub profile]
-- **LinkedIn:** [Add your LinkedIn profile]
-- **Email:** [Add your professional email]
+- **GitHub:** https://github.com/JulMug
+- **LinkedIn:** https://www.linkedin.com/in/julien-busiho-b0884b199/
+- **Email:** julienbusiho00243@gmail.com 
 
 ---
 
