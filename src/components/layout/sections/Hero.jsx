@@ -1,5 +1,50 @@
 
-function Hero() {
+import julienPhoto from '../../../assets/julien-busiho.webp'
+
+function Hero({ language = 'FR' }) {
+  const content = {
+    FR: {
+      availability: 'Ouvert aux opportunités',
+      greeting: 'Bonjour, je suis',
+      role: 'Développeur Frontend',
+      and: ' & ',
+      analyst: 'Analyste de données',
+      description:
+        "Je conçois des solutions numériques grâce à la technologie, aux données et à l'innovation. Passionné par la création d'expériences utiles et la transformation des idées en solutions concrètes.",
+      projects: 'Découvrir mes projets',
+      contact: 'Me contacter',
+      connect: 'Retrouvez-moi',
+      based: 'Basé à',
+      location: 'Goma, RDC',
+      focus: 'Objectif actuel',
+      currentFocus: 'Construire et apprendre',
+      tagline: 'Technologie · Données · Innovation',
+      focusValue: 'Technology & Data',
+      mindset: 'Toujours apprendre',
+    },
+    EN: {
+      availability: 'Open to opportunities',
+      greeting: "Hello, I'm",
+      role: 'Frontend Developer',
+      and: ' & ',
+      analyst: 'Data Analyst',
+      description:
+        'Building digital solutions through technology, data and innovation. Passionate about creating useful experiences and transforming ideas into meaningful solutions.',
+      projects: 'Explore My Projects',
+      contact: 'Contact Me',
+      connect: 'Connect',
+      based: 'Based in',
+      location: 'Goma, DRC',
+      focus: 'Current focus',
+      currentFocus: 'Building & Learning',
+      tagline: 'Technology · Data · Innovation',
+      focusValue: 'Technology & Data',
+      mindset: 'Always Learning',
+    },
+  }
+
+  const t = content[language] || content.FR
+
   return (
     <section
       id="home"
@@ -14,12 +59,12 @@ function Hero() {
           <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2">
             <span className="h-2 w-2 rounded-full bg-green-400" />
             <span className="text-xs font-medium text-muted">
-              Open to opportunities
+              {t.availability}
             </span>
           </div>
 
           <p className="mb-3 text-lg font-medium text-secondary">
-            Hello, I'm
+            {t.greeting}
           </p>
 
           <h1 className="font-heading text-5xl font-bold leading-tight text-text md:text-6xl xl:text-7xl">
@@ -29,15 +74,13 @@ function Hero() {
           </h1>
 
           <h2 className="mt-6 font-heading text-xl font-semibold text-text md:text-2xl">
-            Frontend Developer
-            <span className="text-primary"> & </span>
-            Data Analyst
+            {t.role}
+            <span className="text-primary">{t.and}</span>
+            {t.analyst}
           </h2>
 
           <p className="mt-5 max-w-xl text-base leading-8 text-muted md:text-lg">
-            Building digital solutions through technology, data and
-            innovation. Passionate about creating useful experiences
-            and transforming ideas into meaningful solutions.
+            {t.description}
           </p>
 
           {/* Call to action */}
@@ -46,7 +89,7 @@ function Hero() {
               href="#projects"
               className="btn border-none bg-primary px-6 text-background hover:bg-primary/85"
             >
-              Explore My Projects
+              {t.projects}
               <span aria-hidden="true">↗</span>
             </a>
 
@@ -54,14 +97,14 @@ function Hero() {
               href="#contact"
               className="btn btn-outline border-border px-6 text-text hover:border-secondary hover:bg-secondary hover:text-background"
             >
-              Contact Me
+              {t.contact}
             </a>
           </div>
 
           {/* Social links */}
           <div className="mt-10 flex items-center gap-6">
             <span className="text-xs font-semibold uppercase tracking-widest text-muted">
-              Connect
+              {t.connect}
             </span>
 
             <a
@@ -101,16 +144,18 @@ function Hero() {
               </div>
 
               <div className="relative z-10 flex flex-col items-center">
-                <div className="flex h-36 w-36 items-center justify-center rounded-full border-2 border-primary/50 bg-surface font-heading text-5xl font-bold text-primary shadow-lg shadow-primary/10 md:h-44 md:w-44 md:text-6xl">
-                  JB
-                </div>
+                <img
+                src={julienPhoto}
+                alt="Julien Busiho"
+                className="h-36 w-36 rounded-full border-2 border-primary/50 object-cover shadow-lg shadow-primary/10 md:h-44 md:w-44"
+                />
 
                 <p className="mt-5 font-heading text-lg font-semibold text-text">
                   Julien Busiho
                 </p>
 
                 <p className="mt-1 text-sm text-muted">
-                  Technology · Data · Innovation
+                  {t.tagline}
                 </p>
               </div>
 
@@ -138,10 +183,10 @@ function Hero() {
                   name: <span className="text-green-300">'Julien Busiho'</span>,
                 </p>
                 <p className="pl-5 text-muted">
-                  focus: <span className="text-green-300">'Technology & Data'</span>,
+                  focus: <span className="text-green-300">'{t.focusValue}'</span>,
                 </p>
                 <p className="pl-5 text-muted">
-                  mindset: <span className="text-green-300">'Always Learning'</span>
+                  mindset: <span className="text-green-300">'{t.mindset}'</span>
                 </p>
                 <p>{'}'}</p>
               </div>
@@ -150,16 +195,16 @@ function Hero() {
 
           {/* Floating information cards */}
           <div className="absolute -left-5 top-16 hidden rounded-xl border border-border bg-surface p-4 shadow-xl sm:block">
-            <p className="text-xs text-muted">Based in</p>
+            <p className="text-xs text-muted">{t.based}</p>
             <p className="mt-1 font-heading text-sm font-semibold text-text">
-              Goma, DRC
+              {t.location}
             </p>
           </div>
 
           <div className="absolute -bottom-5 -right-3 rounded-xl border border-border bg-surface p-4 shadow-xl">
-            <p className="text-xs text-muted">Current focus</p>
+            <p className="text-xs text-muted">{t.focus}</p>
             <p className="mt-1 font-heading text-sm font-semibold text-secondary">
-              Building & Learning
+              {t.currentFocus}
             </p>
           </div>
         </div>

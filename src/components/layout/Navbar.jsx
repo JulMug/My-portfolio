@@ -1,152 +1,136 @@
 
-import { useState } from 'react'
+import julienPhoto from '../../assets/julien-busiho.webp'
+import { useEffect, useState } from 'react'
 
-function Navbar() {
-  const [language, setLanguage] = useState('EN')
-  const [menuOpen, setMenuOpen] = useState(false)
+function Navbar({ language, setLanguage }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const navigation = {
-    EN: [
-      { label: 'Home', href: '#home' },
-      { label: 'About', href: '#about' },
-      { label: 'Skills', href: '#skills' },
-      { label: 'Projects', href: '#projects' },
-      { label: 'Journey', href: '#journey' },
-      { label: 'Contact', href: '#contact' },
-    ],
-    FR: [
-      { label: 'Accueil', href: '#home' },
-      { label: 'À propos', href: '#about' },
-      { label: 'Compétences', href: '#skills' },
-      { label: 'Projets', href: '#projects' },
-      { label: 'Parcours', href: '#journey' },
-      { label: 'Contact', href: '#contact' },
-    ],
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('portfolio-theme') || 'dark'
+  })
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('portfolio-theme', theme)
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme((current) => current === 'dark' ? 'light' : 'dark')
   }
 
-  const links = navigation[language]
+  const translations = {
+    FR: {
+      links: ['Accueil', 'À propos', 'Compétences', 'Projets', 'Parcours', 'Contact'],
+      connect: 'Me contacter',
+      openMenu: 'Ouvrir le menu',
+      closeMenu: 'Fermer le menu',
+      light: 'Activer le thème clair',
+      dark: 'Activer le thème sombre',
+    },
+    EN: {
+      links: ['Home', 'About', 'Skills', 'Projects', 'Journey', 'Contact'],
+      connect: "Let's Connect",
+      openMenu: 'Open menu',
+      closeMenu: 'Close menu',
+      light: 'Enable light theme',
+      dark: 'Enable dark theme',
+    },
+  }
+
+  const t = translations[language]
+
+  const links = [
+    { label: t.links[0], href: '#home' },
+    { label: t.links[1], href: '#about' },
+    { label: t.links[2], href: '#skills' },
+    { label: t.links[3], href: '#projects' },
+    { label: t.links[4], href: '#journey' },
+    { label: t.links[5], href: '#contact' },
+  ]
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md">
-      <nav
-        className="navbar mx-auto flex min-h-20 max-w-[1280px] items-center justify-between px-5 md:px-10"
-        aria-label="Main navigation"
-      >
-        {/* Logo */}
-        <a
-          href="#home"
-          className="font-heading text-2xl font-bold tracking-tight text-text"
-          aria-label="Julien Busiho - Home"
-        >
-          JULIEN<span className="text-primary">.</span>
+    <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
+      <nav className="navbar mx-auto max-w-7xl px-6">
+
+        <a href="#home" className="flex items-center gap-2">
+        <img
+          src={julienPhoto}
+           alt="Julien Busiho"
+           className="h-10 w-10 rounded-full border-2 border-primary object-cover"
+             />
+             <span className="text-xl font-bold text-text">
+           Julien<span className="text-primary">.</span>
+            </span>
         </a>
 
-        {/* Desktop navigation */}
-        <div className="hidden items-center gap-7 lg:flex">
+        <div className="hidden flex-1 items-center justify-center gap-8 md:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted transition-colors hover:text-primary"
+              className="text-sm text-muted transition-colors hover:text-primary"
             >
               {link.label}
             </a>
           ))}
         </div>
 
-        {/* Actions */}
-        <div className="hidden items-center gap-4 lg:flex">
-          <div className="flex items-center gap-1 text-sm font-semibold">
-            <button
-              type="button"
-              onClick={() => setLanguage('FR')}
-              className={language === 'FR' ? 'text-primary' : 'text-muted hover:text-text'}
-              aria-pressed={language === 'FR'}
-            >
-              FR
-            </button>
+        <div className="ml-auto flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            className="btn btn-ghost btn-circle"
+            aria-label={theme === 'dark' ? t.light : t.dark}
+            title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
 
-            <span className="text-muted">|</span>
-
-            <button
-              type="button"
-              onClick={() => setLanguage('EN')}
-              className={language === 'EN' ? 'text-primary' : 'text-muted hover:text-text'}
-              aria-pressed={language === 'EN'}
-            >
-              EN
-            </button>
-          </div>
+          <button
+            onClick={() => setLanguage(language === 'FR' ? 'EN' : 'FR')}
+            className="btn btn-ghost btn-sm"
+            aria-label={language === 'FR' ? 'Switch to English' : 'Passer en français'}
+          >
+            {language === 'FR' ? 'EN' : 'FR'}
+          </button>
 
           <a
             href="#contact"
-            className="btn border-none bg-primary px-5 text-sm font-semibold text-background hover:bg-primary/85"
+            className="btn hidden border-0 bg-primary px-5 text-white hover:opacity-90 md:inline-flex"
           >
-            {language === 'EN' ? 'Let’s Talk' : 'Me contacter'}
+            {t.connect}
           </a>
-        </div>
 
-        {/* Mobile menu button */}
-        <button
-          type="button"
-          className="btn btn-square btn-ghost text-text lg:hidden"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-navigation"
-        >
-          <span className="text-2xl">{menuOpen ? '✕' : '☰'}</span>
-        </button>
+          <button
+            className="btn btn-ghost btn-circle md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? t.closeMenu : t.openMenu}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? '✕' : '☰'}
+          </button>
+        </div>
       </nav>
 
-      {/* Mobile navigation */}
-      {menuOpen && (
-        <div
-          id="mobile-navigation"
-          className="border-t border-border bg-surface px-5 py-5 lg:hidden"
-        >
-          <div className="mx-auto flex max-w-[1280px] flex-col gap-5">
-            {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="text-sm font-medium text-muted transition-colors hover:text-primary"
-              >
-                {link.label}
-              </a>
-            ))}
-
-            <div className="flex items-center gap-3 border-t border-border pt-4">
-              <button
-                type="button"
-                onClick={() => setLanguage('FR')}
-                className={language === 'FR' ? 'font-bold text-primary' : 'text-muted'}
-                aria-pressed={language === 'FR'}
-              >
-                FR
-              </button>
-
-              <span className="text-muted">|</span>
-
-              <button
-                type="button"
-                onClick={() => setLanguage('EN')}
-                className={language === 'EN' ? 'font-bold text-primary' : 'text-muted'}
-                aria-pressed={language === 'EN'}
-              >
-                EN
-              </button>
-            </div>
-
+      {isMenuOpen && (
+        <div className="flex flex-col gap-4 border-t border-border bg-background px-6 py-5 md:hidden">
+          {links.map((link) => (
             <a
-              href="#contact"
-              onClick={() => setMenuOpen(false)}
-              className="btn border-none bg-primary text-background hover:bg-primary/85"
+              key={link.href}
+              href={link.href}
+              onClick={() => setIsMenuOpen(false)}
+              className="text-sm text-muted hover:text-primary"
             >
-              {language === 'EN' ? 'Let’s Talk' : 'Me contacter'}
+              {link.label}
             </a>
-          </div>
+          ))}
+
+          <a
+            href="#contact"
+            onClick={() => setIsMenuOpen(false)}
+            className="btn border-0 bg-primary text-white"
+          >
+            {t.connect}
+          </a>
         </div>
       )}
     </header>
