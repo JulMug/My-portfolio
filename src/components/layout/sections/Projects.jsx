@@ -1,10 +1,16 @@
 
 import { GitBranch } from 'lucide-react'
 
+import fikiriImage from '../../../assets/FikiriID.jpeg'
+import quizzyImage from '../../../assets/Quizzy.png'
+import smartRestoImage from '../../../assets/SmartResto.png'
+import taskflowImage from '../../../assets/Taskflow.png'
+
 const projects = [
   {
     number: '01',
     name: 'Fikiri ID',
+    image: fikiriImage,
     category: {
       FR: 'Projet d’identité numérique.',
       EN: 'Digital identity project.',
@@ -13,13 +19,14 @@ const projects = [
       FR: 'Découvrez le projet Fikiri ID et son implémentation à travers son dépôt de code.',
       EN: 'Explore the Fikiri ID project and its implementation through its source code repository.',
     },
-    stack: ['Typescript', 'Python', 'Javascrip', 'Tailwind CSS', ' Makefile', 'Dockerfile', 'HTML'],
+    stack: ['TypeScript', 'Python', 'JavaScript', 'Tailwind CSS', 'Makefile', 'Dockerfile', 'HTML'],
     github: 'https://github.com/UNDP-FIKIRI-APPS/fikiri_id',
     featured: true,
   },
   {
     number: '02',
     name: 'Quizzy',
+    image: quizzyImage,
     category: {
       FR: 'Application de quiz interactifs.',
       EN: 'Interactive quiz application.',
@@ -28,12 +35,13 @@ const projects = [
       FR: 'Une expérience de quiz conçue pour rendre les questionnaires clairs, interactifs et engageants.',
       EN: 'A focused quiz experience designed to make answering questions clear and engaging.',
     },
-    stack: ['Javascript', 'CSS', 'HTML'],
+    stack: ['JavaScript', 'CSS', 'HTML'],
     github: 'https://github.com/shammah-lab/Quizzy-Application-PrimeTek-26',
   },
   {
     number: '03',
     name: 'TaskFlow',
+    image: taskflowImage,
     category: {
       FR: 'Application de gestion des tâches.',
       EN: 'Task management application.',
@@ -42,12 +50,13 @@ const projects = [
       FR: 'Un espace de travail organisé pour gérer les tâches et suivre les priorités quotidiennes.',
       EN: 'A clear workspace for organizing tasks and keeping everyday priorities in view.',
     },
-    stack: ['React', 'Typescript', 'Tailwind CSS', 'CSS', 'HTML'],
+    stack: ['React', 'TypeScript', 'Tailwind CSS', 'CSS', 'HTML'],
     github: 'https://github.com/JulMug/taskflow-react-app',
   },
   {
     number: '04',
     name: 'SmartResto',
+    image: smartRestoImage,
     category: {
       FR: 'Application de gestion de restaurant.',
       EN: 'Restaurant management application.',
@@ -68,7 +77,6 @@ const translations = {
     intro: 'Quatre projets développés autour de besoins concrets et de solutions numériques.',
     featured: 'PROJET À LA UNE',
     selected: 'PROJET SÉLECTIONNÉ',
-    screenshot: 'Espace réservé à une capture d’écran',
     viewCode: 'Voir le code',
   },
   EN: {
@@ -77,7 +85,6 @@ const translations = {
     intro: 'Four projects built around real needs and digital solutions.',
     featured: 'FEATURED PROJECT',
     selected: 'SELECTED PROJECT',
-    screenshot: 'Screenshot placeholder',
     viewCode: 'View source code',
   },
 }
@@ -91,7 +98,6 @@ function Projects({ language = 'FR' }) {
       className="border-t border-border bg-background px-6 py-20 transition-colors duration-300 md:px-10 md:py-24 lg:px-20"
     >
       <div className="mx-auto flex max-w-[1280px] flex-col gap-10">
-
         <p className="text-xs font-medium text-secondary">
           {t.section}
         </p>
@@ -107,7 +113,6 @@ function Projects({ language = 'FR' }) {
         </div>
 
         <div className="grid items-stretch gap-6 md:grid-cols-2">
-
           {projects.map((project) => (
             <article
               key={project.number}
@@ -118,30 +123,29 @@ function Projects({ language = 'FR' }) {
               }`}
             >
               <div
-                className={`flex flex-col justify-center gap-3 bg-background p-8 ${
-                  project.featured ? 'min-h-[200px]' : 'h-[180px]'
+                className={`relative flex items-center justify-center overflow-hidden bg-background p-4 ${
+                  project.featured ? 'h-[240px] md:h-[320px]' : 'h-[200px] md:h-[220px]'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-heading text-[28px] font-medium text-secondary">
-                    [ {project.number} ]
+                <img
+                  src={project.image}
+                  alt={`${project.name} - ${language === 'FR' ? 'Capture d’écran du projet' : 'Project screenshot'}`}
+                  loading="lazy"
+                  className="h-full w-full object-contain"
+                />
+
+                {project.featured && (
+                  <span className="absolute right-5 top-5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary backdrop-blur-sm">
+                    {t.featured}
                   </span>
-
-                  {project.featured && (
-                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                      {t.featured}
-                    </span>
-                  )}
-                </div>
-
-                <p className="text-sm text-muted">
-                  {t.screenshot}
-                </p>
+                )}
               </div>
 
               <div className="flex flex-1 flex-col items-start gap-4 p-6 md:p-8">
                 <span className="text-xs font-medium text-primary">
-                  {project.featured ? t.featured : `${t.selected} / ${project.number}`}
+                  {project.featured
+                    ? t.featured
+                    : `${t.selected} / ${project.number}`}
                 </span>
 
                 <h3 className="font-heading text-[28px] font-medium text-text">
@@ -182,7 +186,6 @@ function Projects({ language = 'FR' }) {
               </div>
             </article>
           ))}
-
         </div>
       </div>
     </section>
