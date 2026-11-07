@@ -212,6 +212,7 @@ function Hero({ language = 'EN' }) {
           </div>
         </div>
       </div>
+      <div className="mx-auto h-px w-4/5 bg-gradient-to-r from-transparent via-border to-transparent" />
     </section>
   )
 }

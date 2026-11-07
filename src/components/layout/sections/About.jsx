@@ -131,6 +131,7 @@ function About({ language = 'FR' }) {
         </div>
       </div>
     </section>
+    
   )
 }
 
