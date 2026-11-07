@@ -11,7 +11,7 @@ import Contact from './components/layout/sections/Contact'
 import Footer from './components/layout/Footer'
 
 function App() {
-  const [language, setLanguage] = useState('FR')
+  const [language, setLanguage] = useState('EN')
 
   return (
     <div className="min-h-screen bg-background text-text">

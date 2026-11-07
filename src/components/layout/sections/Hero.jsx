@@ -1,8 +1,28 @@
 
 import julienPhoto from '../../../assets/julien-busiho.webp'
 
-function Hero({ language = 'FR' }) {
+function Hero({ language = 'EN' }) {
   const content = {
+  EN: {
+      availability: 'Open to opportunities',
+      greeting: "Hello, I'm",
+      role: 'Frontend Developer',
+      and: ' & ',
+      analyst: 'Data Analyst',
+      description:
+        'Building digital solutions through technology, data and innovation. Passionate about creating useful experiences and transforming ideas into meaningful solutions.',
+      projects: 'Explore My Projects',
+      contact: 'Contact Me',
+      connect: 'Connect',
+      based: 'Based in',
+      location: 'Goma, DRC',
+      focus: 'Current focus',
+      currentFocus: 'Building & Learning',
+      tagline: 'Technology · Data · Innovation',
+      focusValue: 'Technology & Data',
+      mindset: 'Always Learning',
+      hireMe: 'Hire Me',
+    },
     FR: {
       availability: 'Ouvert aux opportunités',
       greeting: 'Bonjour, je suis',
@@ -21,29 +41,11 @@ function Hero({ language = 'FR' }) {
       tagline: 'Technologie · Données · Innovation',
       focusValue: 'Technology & Data',
       mindset: 'Toujours apprendre',
-    },
-    EN: {
-      availability: 'Open to opportunities',
-      greeting: "Hello, I'm",
-      role: 'Frontend Developer',
-      and: ' & ',
-      analyst: 'Data Analyst',
-      description:
-        'Building digital solutions through technology, data and innovation. Passionate about creating useful experiences and transforming ideas into meaningful solutions.',
-      projects: 'Explore My Projects',
-      contact: 'Contact Me',
-      connect: 'Connect',
-      based: 'Based in',
-      location: 'Goma, DRC',
-      focus: 'Current focus',
-      currentFocus: 'Building & Learning',
-      tagline: 'Technology · Data · Innovation',
-      focusValue: 'Technology & Data',
-      mindset: 'Always Learning',
+      hireMe: 'Engagez-moi',
     },
   }
 
-  const t = content[language] || content.FR
+  const t = content[language] || content.EN
 
   return (
     <section
@@ -94,11 +96,12 @@ function Hero({ language = 'FR' }) {
             </a>
 
             <a
-              href="#contact"
-              className="btn btn-outline border-border px-6 text-text hover:border-secondary hover:bg-secondary hover:text-background"
-            >
-              {t.contact}
-            </a>
+               href="#contact"
+                className="btn btn-outline border-primary px-6 text-primary transition-all duration-300 hover:border-primary hover:bg-primary hover:text-background"
+>
+                  {t.hireMe}
+  <span aria-hidden="true">↗</span>
+</a>
           </div>
 
           {/* Social links */}
