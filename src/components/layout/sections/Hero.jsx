@@ -52,7 +52,7 @@ function Hero({ language = 'EN' }) {
       id="home"
       className="relative overflow-hidden bg-background px-5 py-20 md:px-10 md:py-28"
     >
-      <div className="mx-auto grid max-w-[1280px] items-center gap-16 lg:grid-cols-2">
+     <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-10 min-[768px]:grid-cols-2 min-[768px]:gap-8 lg:gap-16">
 
         {/* LEFT: Introduction */}
         <div className="relative z-10">
